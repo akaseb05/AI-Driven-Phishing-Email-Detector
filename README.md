@@ -1,25 +1,90 @@
-# AI-Driven-Phishing-Email-Detector
-An intelligent phishing-detection engine that analyzes email content + metadata to estimate risk and explain why.
+# **AI-Driven Phishing Email Detector (WIP)**
 
-🔍 Overview
+### **Status:** 🚧 *In Development*
 
-This project is an early-stage prototype of an AI-powered phishing detection system.
-It takes in email text + metadata and outputs:
+### **Goal:** Build an intelligent phishing-detection engine that analyzes email content and metadata to estimate risk and explain why.
 
-A phishing probability score (0–100%)
+---
 
-A breakdown of factors influencing the score
+## 🔍 **Overview**
 
-A short explanation summarizing the reasoning
+This project is an early-stage prototype of an **AI-powered phishing detection system**. It accepts email text + metadata and outputs:
 
-Right now the project uses rule-based scoring, with plans to integrate:
+* A **phishing probability score** (0–100%)
+* A factor breakdown (sender, CC list, language, links)
+* A clear explanation summarizing why the email looks suspicious or safe
 
-Large Language Model (LLM) social-engineering detection
+Right now, the system uses rule-based analysis. The plan is to integrate:
 
-Classical ML for link + domain reputation analysis
+* LLM-based social-engineering detection
+* ML classification for domain/link patterns
+* IMAP integration to scan real inboxes
+* A dashboard for end-users
 
-IMAP/SMTP email ingestion
+This repo reflects ongoing development.
 
-User-friendly dashboard + API endpoints
+---
 
-This repository is still in development — core features are being added piece by piece.
+## ✨ **What’s Working Right Now**
+
+* FastAPI backend with one endpoint: `/classify-email`
+* Rule-based scoring system:
+
+  * Sender domain consistency
+  * Suspicious CC domain spread
+  * Content-based red flags
+  * URL and link analysis
+* Automatic probability calculation and explanation text
+
+---
+
+## 🧠 **How the Current Engine Works**
+
+The system calculates four main scores:
+
+**1. Sender Score**
+Checks how trustworthy the sender domain looks relative to recipients.
+
+**2. Link Score**
+Flags risky URLs, IP-based links, unusual structures.
+
+**3. CC Anomaly Score**
+Detects weird CC patterns (domains that shouldn’t be there, too many unrelated domains).
+
+**4. Content Score**
+Analyzes urgency markers, scam phrases, excessive caps, suspicious language.
+
+Scores are weighted and combined into a final phishing probability.
+
+---
+
+## 🚀 **Run Locally**
+
+```bash
+pip install -r requirements.txt
+uvicorn app:app --reload
+```
+
+Then open:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+Use the built-in API Explorer to test emails.
+
+---
+
+## 📌 **Why This Project Matters**
+
+Phishing is still the #1 cybersecurity attack vector.
+
+Most tools only check technical indicators.
+This project focuses on **behavioral + linguistic patterns**, combining:
+
+* NLP
+* Email protocol handling
+* Security threat modeling
+* AI risk scoring
+
+---
